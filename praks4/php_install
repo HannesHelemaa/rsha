@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# php paigaldusskript
+#
+#kontrollime, kas php teenud on paigaldatud
+php=$(dpkg-query -W -f='${Status}' php 2>/dev/null | grep -c "ok installed")
+#antud käsu tulemusena on kas 0 või 1
+#kui sidade arv on 0 - pole paigaldatud ja tuleb teenud paigaldada
+if [ $php -eq 0 ]; then
+	echo "Paigaldame php"
+	apt-get install -y php
+# kui ridade arv on 1, siis teenud on paigaldatud
+elif [ $php -eq 1 ]; then
+	echo "php on paigaldatud!"
+	#laseme staatuse näitamist
+	service php status
+fi
