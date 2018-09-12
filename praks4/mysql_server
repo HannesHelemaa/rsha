@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# mysql_server paigaldusskript
+#
+#kontrollime, kas mysql teenud on paigaldatud
+MYSQL=$(dpkg-query -W -f='${Status}' mysql 2>/dev/null | grep -c "ok installed")
+#antud käsu tulemusena on kas 0 või 1
+#kui sidade arv on 0 - pole paigaldatud ja tuleb teenud paigaldada
+if [ $MYSQL -eq 0 ]; then
+	echo "Paigaldame mysql"
+	apt-get install -y mysql-server
+# kui ridade arv on 1, siis teenud on paigaldatud
+elif [ $MYSQL -eq 1 ]; then
+	echo "mysql on paigaldatud!"
+	#laseme staatuse näitamist
+	service mysql status
+fi
