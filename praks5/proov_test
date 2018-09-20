@@ -1,0 +1,5 @@
+SHELL = /bin/bash
+
+MAILTO= root
+
+0-59 * * * * /home/temp/cron_proov
